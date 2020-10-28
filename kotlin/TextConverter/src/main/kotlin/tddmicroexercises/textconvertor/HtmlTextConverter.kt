@@ -1,24 +1,18 @@
 package tddmicroexercises.textconvertor
 
 import java.io.BufferedReader
-import java.io.FileReader
 import java.io.IOException
+import java.io.Reader
+import kotlin.streams.toList
 
-class HtmlTextConverter(val filename: String) {
+class HtmlTextConverter(private val reader: Reader) {
 
     @Throws(IOException::class)
     fun convertToHtml(): String {
-
-        val reader = BufferedReader(FileReader(filename))
-
-        var line: String? = reader.readLine()
-        var html = ""
-        while (line != null) {
-            html += StringEscapeUtils.escapeHtml(line)
-            html += "<br />"
-            line = reader.readLine()
-        }
-        return html
-
+        return BufferedReader(reader)
+                .lines()
+                .map(StringEscapeUtils::escapeHtml)
+                .toList()
+                .joinToString("<br />", postfix = "<br />")
     }
 }
