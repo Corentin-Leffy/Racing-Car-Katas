@@ -14,6 +14,8 @@ object TestData {
     val race5: Race = Race("Fictional Grand Prix 2", driver4, driver2, driver1)
     val race6: Race = Race("Fictional Grand Prix 3", driver2, driver1, driver4)
 
+    val resultForRace1: Results = hashMapOf("Nico Rosberg" to 25, "Lewis Hamilton" to 18, "Sebastian Vettel" to 15)
+
     val sampleLeaderboard1: Leaderboard = Leaderboard(race1, race2, race3)
     val sampleLeaderboard2: Leaderboard = Leaderboard(race4, race5, race6)
 }
