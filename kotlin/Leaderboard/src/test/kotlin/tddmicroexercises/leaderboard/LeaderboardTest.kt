@@ -1,10 +1,8 @@
 package tddmicroexercises.leaderboard
 
-import org.junit.Test
-
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-
+import org.junit.Test
 import tddmicroexercises.leaderboard.TestData.driver1
 import tddmicroexercises.leaderboard.TestData.driver2
 import tddmicroexercises.leaderboard.TestData.driver3
@@ -12,7 +10,7 @@ import tddmicroexercises.leaderboard.TestData.driver3
 class LeaderboardTest {
 
     @Test
-    fun itShouldSumThePoints() {
+    fun `Should sum the points`() {
         // setup
 
         // act
@@ -20,22 +18,22 @@ class LeaderboardTest {
 
         // verify
         assertTrue("results $results", results.containsKey("Lewis Hamilton"))
-        assertEquals((18 + 18 + 25).toLong(), (results.get("Lewis Hamilton") as Int).toLong())
+        assertEquals((18 + 18 + 25).toLong(), (results["Lewis Hamilton"] as Int).toLong())
     }
 
     @Test
-    fun isShouldFindTheWinner() {
+    fun `Should find the winner`() {
         // setup
 
         // act
         val result = TestData.sampleLeaderboard1.driverRankings()
 
         // verify
-        assertEquals("Lewis Hamilton", result.get(0))
+        assertEquals("Lewis Hamilton", result[0])
     }
 
     @Test
-    fun itShouldKeepAllDriversWhenSamePoints() {
+    fun `Should keep all drivers when same points`() {
         // setup
         // bug, drops drivers with same points
         val winDriver1 = Race("Australian Grand Prix", driver1, driver2, driver3)

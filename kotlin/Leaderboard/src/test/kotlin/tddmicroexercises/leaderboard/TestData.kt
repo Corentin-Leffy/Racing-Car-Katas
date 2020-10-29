@@ -2,36 +2,18 @@ package tddmicroexercises.leaderboard
 
 object TestData {
 
-    var driver1: Driver
-    var driver2: Driver
-    var driver3: Driver
-    var driver4: SelfDrivingCar
+    val driver1: Driver = CountryDriver("Nico Rosberg", "DE")
+    val driver2: Driver = CountryDriver("Lewis Hamilton", "UK")
+    val driver3: Driver = CountryDriver("Sebastian Vettel", "DE")
+    val driver4: Driver = AutomaticDriver("1.3", "Acme")
 
-    var race1: Race
-    var race2: Race
-    var race3: Race
-    var race4: Race
-    var race5: Race
-    var race6: Race
+    val race1: Race = Race("Australian Grand Prix", driver1, driver2, driver3)
+    val race2: Race = Race("Malaysian Grand Prix", driver3, driver2, driver1)
+    val race3: Race = Race("Chinese Grand Prix", driver2, driver1, driver3)
+    val race4: Race = Race("Fictional Grand Prix 1", driver1, driver2, driver4)
+    val race5: Race = Race("Fictional Grand Prix 2", driver4, driver2, driver1)
+    val race6: Race = Race("Fictional Grand Prix 3", driver2, driver1, driver4)
 
-    var sampleLeaderboard1: Leaderboard
-    var sampleLeaderboard2: Leaderboard
-
-    init {
-        driver1 = Driver("Nico Rosberg", "DE")
-        driver2 = Driver("Lewis Hamilton", "UK")
-        driver3 = Driver("Sebastian Vettel", "DE")
-        driver4 = SelfDrivingCar("1.2", "Acme")
-
-        race1 = Race("Australian Grand Prix", driver1, driver2, driver3)
-        race2 = Race("Malaysian Grand Prix", driver3, driver2, driver1)
-        race3 = Race("Chinese Grand Prix", driver2, driver1, driver3)
-        race4 = Race("Fictional Grand Prix 1", driver1, driver2, driver4)
-        race5 = Race("Fictional Grand Prix 2", driver4, driver2, driver1)
-        driver4.algorithmVersion = "1.3"
-        race6 = Race("Fictional Grand Prix 3", driver2, driver1, driver4)
-
-        sampleLeaderboard1 = Leaderboard(race1, race2, race3)
-        sampleLeaderboard2 = Leaderboard(race4, race5, race6)
-    }
+    val sampleLeaderboard1: Leaderboard = Leaderboard(race1, race2, race3)
+    val sampleLeaderboard2: Leaderboard = Leaderboard(race4, race5, race6)
 }
