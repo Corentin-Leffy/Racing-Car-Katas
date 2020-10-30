@@ -1,8 +1,5 @@
 package tddmicroexercises.turnticketdispenser
 
-object TurnNumberSequence {
-    private var _turnNumber = 0
-
+interface TurnNumberSequence {
     val nextTurnNumber: Int
-        get() = _turnNumber++
 }

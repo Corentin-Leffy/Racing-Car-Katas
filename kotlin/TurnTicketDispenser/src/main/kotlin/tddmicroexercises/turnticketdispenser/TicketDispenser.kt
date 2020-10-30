@@ -1,10 +1,8 @@
 package tddmicroexercises.turnticketdispenser
 
-class TicketDispenser {
+class TicketDispenser(
+    private val turnNumberSequence: TurnNumberSequence = GlobalTurnNumberSequence
+) {
     val turnTicket: TurnTicket
-        get() {
-            val newTurnNumber = TurnNumberSequence.nextTurnNumber
-
-            return TurnTicket(newTurnNumber)
-        }
+        get() = TurnTicket(turnNumberSequence.nextTurnNumber)
 }
