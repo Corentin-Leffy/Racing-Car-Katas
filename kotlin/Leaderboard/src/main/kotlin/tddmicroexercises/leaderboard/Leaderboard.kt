@@ -1,44 +1,37 @@
 package tddmicroexercises.leaderboard
 
 import java.util.*
+import kotlin.collections.ArrayList
+
+typealias Results = Map<String, Int>
+typealias DriversName = List<String>
 
 class Leaderboard(vararg races: Race) {
 
-    private val races: List<Race>
+    private val races: Races = Races(*races)
 
-    init {
-        this.races = arrayListOf(*races)
+    fun driverResults(): Results {
+        return races.map(Race::getResults)
+            .asSequence()
+            .flatMap { it.asSequence() }
+            .groupBy({ it.key }) { it.value }
+            .mapValues { it.value.sum() }
     }
 
-    fun driverResults(): Map<String, Int> {
-        val results = HashMap<String, Int>()
-        for (race in this.races) {
-            for (driver in race.results) {
-                val driverName = race.getDriverName(driver)
-                val points = race.getPoints(driver)
-                if (results.containsKey(driverName)) {
-                    results[driverName!!] = results[driverName]!!.plus(points)
-                } else {
-                    results[driverName!!] = 0 + points
-                }
-            }
-        }
-        return results
-    }
-
-    fun driverRankings(): List<String> {
+    fun driverRankings(): DriversName {
         val results = driverResults()
-        val resultsList = ArrayList(results.keys)
-        Collections.sort(resultsList, DriverByPointsDescendingComparator(results))
-        return resultsList
+        val driversName = ArrayList(results.keys)
+        driversName.sortWith(DriverByPointsDescendingComparator(results))
+        return driversName
     }
 
-    private class DriverByPointsDescendingComparator constructor(private val results: Map<String, Int>) :
-        Comparator<String> {
+    private class DriverByPointsDescendingComparator(
+        private val results: Results
+    ) : Comparator<String> {
 
-        override fun compare(driverName1: String, driverName2: String): Int {
-            return -results[driverName2]?.let { results[driverName1]!!.compareTo(it) }!!
-        }
+        override fun compare(aDriverName: String, anotherDriverName: String): Int =
+            -pointFor(aDriverName).compareTo(pointFor(anotherDriverName))
+
+        private fun pointFor(driverName: String) = results[driverName] ?: error("$driverName does not exist")
     }
-
 }
